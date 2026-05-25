@@ -1,15 +1,28 @@
 import requests
 from bs4 import BeautifulSoup
+import csv  # Biblioteca nativa para manipulação de arquivos CSV (Excel)
 
 def consumir_api():
     print("-" * 50)
     print("FASE 2: Consumindo Dados de uma API Pública")
     print("-" * 50)
     
-    # Tornando o input dinâmico para o usuário escolher o CEP
-    cep = input("Digite um CEP (apenas números) ou aperte Enter para o padrão: ").strip()
-    if not cep:
-        cep = "01001000"  # CEP padrão caso o usuário não digite nada
+    while True:
+        entrada = input("Digite um CEP (8 números) ou aperte Enter para o padrão: ").strip()
+        
+        if not entrada:
+            cep = "01001000"
+            print(f"-> Usando CEP padrão: {cep}")
+            break
+            
+        cep_limpo = entrada.replace("-", "").replace(".", "").replace(" ", "")
+        
+        if len(cep_limpo) == 8 and cep_limpo.isdigit():
+            cep = cep_limpo
+            break
+        else:
+            print("❌ CEP inválido! Certifique-se de digitar exatamente 8 números (Ex: 12239650).")
+            print("Tente novamente...\n")
     
     url = f"https://viacep.com.br/ws/{cep}/json/"
     
@@ -18,9 +31,8 @@ def consumir_api():
         if response.status_code == 200:
             dados = response.json()
             
-            # Validação caso o ViaCEP não encontre o CEP digitado
             if "erro" in dados:
-                print("❌ CEP não encontrado na base de dados.")
+                print("❌ CEP não encontrado na base de dados do ViaCEP.")
                 return
                 
             print(f"✔️ CEP Localizado: {dados.get('cep')}")
@@ -48,20 +60,31 @@ def executar_scraping():
             titulos = soup.find_all('a', class_='feed-post-link')
             
             print(f"✔️ Sucesso! Encontrados {len(titulos)} títulos na página principal.\n")
-            print("📋 Exibindo e salvando os 5 primeiros resultados coletados:")
+            print("📋 Exibindo resultados no terminal e estruturando a tabela CSV...")
             
-            # --- NOVA MELHORIA: SALVANDO EM ARQUIVO LOCAL ---
-            # O modo 'w' cria ou sobrescreve o arquivo, salvando as notícias limpas
-            with open("noticias_coletadas.txt", "w", encoding="utf-8") as arquivo:
-                arquivo.write("=== NOTÍCIAS COLETADAS VIA WEB SCRAPING ===\n\n")
+            # --- MELHORIA OPÇÃO 2: SALVANDO EM CSV (EXCEL) ---
+            nome_arquivo = "noticias_g1.csv"
+            
+            # Abrimos o arquivo configurando o encoding para não quebrar acentos no Windows
+            with open(nome_arquivo, mode="w", newline="", encoding="utf-8-sig") as arquivo_csv:
+                # Criamos o escritor do CSV
+                escreve = csv.writer(arquivo_csv, delimiter=";")
                 
+                # Escreve o cabeçalho (as colunas da tabela)
+                escreve.writerow(["Posição", "Título da Notícia", "Link da Matéria"])
+                
+                # Loop para listar e salvar as top 5 notícias
                 for i, titulo in enumerate(titulos[:5], 1):
                     texto_limpo = titulo.text.strip()
+                    link_materia = titulo.get('href') # Coleta o link real da notícia
+                    
+                    # Mostra no terminal para o usuário ver
                     print(f"  {i}. {texto_limpo}")
-                    # Escreve cada linha no arquivo de texto
-                    arquivo.write(f"{i}. {texto_limpo}\n")
+                    
+                    # Escreve a linha correspondente na tabela
+                    escreve.writerow([f"#{i}", texto_limpo, link_materia])
             
-            print("\n💾💾 Arquivo 'noticias_coletadas.txt' gerado com sucesso na pasta!")
+            print(f"\n📊 Tabela '{nome_arquivo}' gerada com sucesso para abertura no Excel!")
             
         else:
             print(f"❌ Não foi possível acessar o site. Status: {response.status_code}")
@@ -71,5 +94,5 @@ def executar_scraping():
 if __name__ == "__main__":
     print("🚀 INICIANDO O DESAFIO WEB\n")
     consumir_api()
-    executar_scraping()
+    executar_scraping()  # Agora ela está perfeitamente definida aqui em cima!
     print("\n🚀 DESAFIO FINALIZADO")
