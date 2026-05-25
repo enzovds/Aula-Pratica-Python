@@ -1,15 +1,33 @@
-# Desafio Prático: Desenvolvimento Web com Python 🌐
+# Desafio Prático: Desenvolvimento Web Avançado com Python 🌐
 
-Este repositório contém a resolução do Desafio Prático Web. O objetivo do projeto é demonstrar a criação de um script em Python capaz de consumir dados de uma API pública e realizar a extração de dados (Web Scraping) de um portal de notícias.
+Este repositório contém a resolução do Desafio Prático Web, totalmente reformulado utilizando o paradigma de **Programação Orientada a Objetos (POO)**. O projeto consiste em um sistema automatizado (Worker) com interface gráfica via terminal que consome dados de uma API pública e realiza mineração de dados (Web Scraping).
 
-## 🛠️ Tecnologias Utilizadas
+## 🚀 Recursos Implementados
+
+- **Arquitetura POO:** Todo o sistema foi estruturado em classes e objetos para melhor encapsulamento e organização do código.
+- **Tratamento de Dados:** Validação robusta de entrada do CEP via terminal, limpando caracteres especiais e tratando erros.
+- **Interface Gráfica CLI:** Dashboard estilizado no terminal com tabelas e barras de progresso animadas utilizando a biblioteca *Rich*.
+- **Automação (Worker):** Script configurado para rodar em segundo plano com um cronômetro regressivo, executando a varredura e atualização dos dados automaticamente.
+- **Persistência em CSV:** Os dados minerados são estruturados e salvos diretamente em um arquivo `.csv` compatível com o Excel.
+
+## 🛠️ Tecnologias e Bibliotecas
 
 - **Python 3**
-- **Requests**: Para chamadas e requisições HTTP (API e HTML).
-- **BeautifulSoup4**: Para extração e manipulação de dados de páginas HTML.
+- **Requests:** Requisições HTTP para consumo da API ViaCEP e download do HTML do G1.
+- **BeautifulSoup4:** Parsing e mineração das tags HTML das manchetes.
+- **Rich:** Renderização do layout, tabelas coloridas e animações no terminal.
+- **CSV (Nativo):** Manipulação e escrita do relatório de dados.
 
-## 🚀 Como Executar o Projeto
+## 📦 Como Executar o Projeto
 
-1. Clone o repositório:
+1. Certifique-se de ter as dependências instaladas:
    ```bash
-   git clone [https://github.com/SEU_USUARIO/NOME_DO_REPOSITORIO.git](https://github.com/enzovds/Aula-Pratica-Python.git)
+   pip install -r requirements.txt
+
+2. Execute o script principal:
+    ```bash
+   python main.py
+
+3. Para encerrar o monitoramento automático, utilize o comando:
+    ```bash
+   Ctrl + C

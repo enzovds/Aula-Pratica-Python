@@ -1,2 +1,4 @@
 requests==2.31.0
 beautifulsoup4==4.12.3
+rich==13.7.1
+schedule==1.2.2
