@@ -28,6 +28,6 @@ Este repositório contém a resolução do Desafio Prático Web, totalmente refo
     ```bash
    python main.py
 
-3. Para encerrar o monitoramento automático, utilize o comando:
+3. Para encerrar o sistema: Pressione a tecla 'Q' no seu teclado a qualquer momento. O robô vai identificar o comando e fechar a aplicação de forma segura e elegante.
     ```bash
-   Ctrl + C
+   q
