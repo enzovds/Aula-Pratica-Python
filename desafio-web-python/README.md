@@ -12,4 +12,4 @@ Este repositório contém a resolução do Desafio Prático Web. O objetivo do p
 
 1. Clone o repositório:
    ```bash
-   git clone [https://github.com/SEU_USUARIO/NOME_DO_REPOSITORIO.git](https://github.com/SEU_USUARIO/NOME_DO_REPOSITORIO.git)
+   git clone [https://github.com/SEU_USUARIO/NOME_DO_REPOSITORIO.git](https://github.com/enzovds/Aula-Pratica-Python.git)
