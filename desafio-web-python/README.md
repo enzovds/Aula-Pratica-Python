@@ -28,6 +28,8 @@ Este repositório contém a resolução do Desafio Prático Web, totalmente refo
     ```bash
    python main.py
 
-3. Para encerrar o sistema: Pressione a tecla 'Q' no seu teclado a qualquer momento. O robô vai identificar o comando e fechar a aplicação de forma segura e elegante.
+3. Fluxo de Uso: - Digite seu CEP quando solicitado para liberar o acesso ao painel.
+
+4. Para encerrar o sistema: Pressione a tecla 'Q' no seu teclado a qualquer momento. O robô vai identificar o comando e fechar a aplicação de forma segura e elegante.
     ```bash
    q
